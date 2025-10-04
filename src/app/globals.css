@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 224 71% 4%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 200 100% 49%;
+    --primary-foreground: 224 71% 4%;
+    --secondary: 177 100% 48%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 215 28% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 215 28% 22%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 215 28% 17%;
+    --input: 215 28% 17%;
+    --ring: 200 100% 49%;
+    --radius: 0.75rem;
+
+    --chart-1: 197 71% 53%;
+    --chart-2: 175 64% 51%;
+    --chart-3: 220 70% 60%;
+    --chart-4: 160 60% 45%;
+    --chart-5: 340 75% 55%;
+
+    --glass-border: 200 100% 49% / 0.2;
+  }
+
+  .dark {
+    --background: 220 40% 5%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 200 100% 49%;
+    --primary-foreground: 224 71% 4%;
+    --secondary: 177 100% 48%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 215 28% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 215 28% 22%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 215 28% 17%;
+    --input: 215 28% 17%;
+    --ring: 200 100% 49%;
+
+    --glass-border: 200 100% 49% / 0.2;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+    .aqi-marker-pin {
+        @apply rounded-full flex items-center justify-center text-xs font-bold shadow-lg transition-all duration-300 ease-in-out;
+        color: white;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+        animation: marker-pulse 2.5s infinite ease-in-out;
+    }
+    .aqi-marker {
+        @apply border-0;
+    }
+
+    .aqi-popup .leaflet-popup-content-wrapper {
+        @apply bg-background/80 backdrop-blur-sm rounded-lg border-border shadow-xl;
+    }
+    .aqi-popup .leaflet-popup-content {
+        @apply my-2 mx-3 text-foreground;
+    }
+    .aqi-popup .leaflet-popup-tip {
+        @apply bg-background/80;
+    }
+
+    @keyframes marker-pulse {
+        0% {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 0 hsla(var(--primary), 0.7);
+        }
+        70% {
+            transform: scale(1);
+            box-shadow: 0 0 0 10px hsla(var(--primary), 0);
+        }
+        100% {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 0 hsla(var(--primary), 0);
+        }
+    }
+}
+
+/* New Login Page Styles */
+@layer utilities {
+    .login-card {
+        background-color: rgba(10, 10, 15, 0.5);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 80px hsla(var(--primary) / 0.3);
+        position: relative;
+    }
+    .tab-underline {
+        position: absolute;
+        bottom: 0;
+        height: 2px;
+        background-color: hsl(var(--primary));
+        transition: left 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), width 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        box-shadow: 0 0 10px hsl(var(--primary));
+        border-radius: 2px;
+    }
+    .input-glow:focus-within {
+        box-shadow: 0 0 25px hsla(var(--primary) / 0.4);
+        border-color: hsla(var(--primary) / 0.5) !important;
+    }
+    .login-button::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 5px;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+        transition: transform 0.8s, opacity 0.8s;
+    }
+    .login-button:active::after {
+        transform: translate(-50%, -50%) scale(100);
+        opacity: 1;
+        transition: transform 0s, opacity 0s;
+    }
+}
+
+/* Home Page Styles */
+@layer components {
+    .live-wallpaper {
+      background: linear-gradient(270deg, #010409, #005f73, hsl(var(--primary)));
+      background-size: 600% 600%;
+      animation: light-trails 15s ease infinite;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -2;
+    }
+    #particles-js-container {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      opacity: 0.3;
+    }
+    .glassmorphic-card {
+      background: rgba(10, 25, 47, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid hsl(var(--glass-border));
+      transition: all 0.3s ease;
+    }
+    .glassmorphic-card:hover {
+      border-color: hsl(var(--primary));
+      box-shadow: 0 0 20px hsla(var(--primary) / 0.4), 0 0 30px hsla(var(--primary) / 0.2);
+    }
+}
